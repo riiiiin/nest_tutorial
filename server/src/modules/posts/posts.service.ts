@@ -4,6 +4,7 @@ import { UpdatePostInput } from './dto/update-post.input';
 
 @Injectable()
 export class PostsService {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   create(createPostInput: CreatePostInput) {
     return 'This action adds a new post';
   }
@@ -16,6 +17,7 @@ export class PostsService {
     return `This action returns a #${id} post`;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(id: number, updatePostInput: UpdatePostInput) {
     return `This action updates a #${id} post`;
   }
