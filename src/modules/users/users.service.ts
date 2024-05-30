@@ -9,7 +9,9 @@ export class UsersService {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+    return this.prisma.user.create({ data: createUserInput });
+
+    // return 'This action adds a new user';
   }
 
   findAll() {

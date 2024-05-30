@@ -40,13 +40,200 @@ type Mutation {
 }
 
 input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  email: String!
+  name: String
+  posts: PostCreateNestedManyWithoutAuthorInput
+}
+
+input PostCreateNestedManyWithoutAuthorInput {
+  create: [PostCreateWithoutAuthorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
+  connect: [PostWhereUniqueInput!]
+}
+
+input PostCreateWithoutAuthorInput {
+  title: String!
+  content: String
+  published: Boolean
+}
+
+input PostCreateOrConnectWithoutAuthorInput {
+  where: PostWhereUniqueInput!
+  create: PostCreateWithoutAuthorInput!
+}
+
+input PostWhereUniqueInput {
+  id: Int
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  title: StringFilter
+  content: StringNullableFilter
+  published: BoolNullableFilter
+  authorId: IntNullableFilter
+  author: UserNullableRelationFilter
+}
+
+input PostWhereInput {
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  id: IntFilter
+  title: StringFilter
+  content: StringNullableFilter
+  published: BoolNullableFilter
+  authorId: IntNullableFilter
+  author: UserNullableRelationFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input BoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+input NestedBoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input UserNullableRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  id: IntFilter
+  email: StringFilter
+  name: StringNullableFilter
+  posts: PostListRelationFilter
+}
+
+input PostListRelationFilter {
+  every: PostWhereInput
+  some: PostWhereInput
+  none: PostWhereInput
+}
+
+input PostCreateManyAuthorInputEnvelope {
+  data: [PostCreateManyAuthorInput!]!
+  skipDuplicates: Boolean
+}
+
+input PostCreateManyAuthorInput {
+  id: Int
+  title: String!
+  content: String
+  published: Boolean
 }
 
 input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  email: String
+  name: String
+  posts: PostCreateNestedManyWithoutAuthorInput
   id: Int!
 }
 

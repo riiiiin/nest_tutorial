@@ -58,6 +58,24 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## prisma & graphql
+
+```bash
+# generate prisma to graphql
+$ npx prisma generate
+
+# NestJSサーバーを起動することによって、AppMoudleの依存関係が解決され、schema.graphqlが生成
+$ npm run start:dev
+
+# src/@generatedの中から使えるファイルをコピー
+# postsモジュールを作成
+$ nest g resource modules/posts
+# ファイルの中身をコピー
+$ cat src/@generated/prisma-nestjs-graphql/user/user.model.ts > src/modules/users/entities/user.entity.ts
+$ cat src/@generated/prisma-nestjs-graphql/user/user-count.output.ts > src/modules/users/entities/user-count.output.ts
+$ cat src/@generated/prisma-nestjs-graphql/post/post.model.ts > src/modules/posts/entities/post.entity.ts
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
