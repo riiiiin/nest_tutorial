@@ -1,42 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
-import { UpdateUserInput } from './dto/update-user.input';
 import { PrismaService } from 'nestjs-prisma';
+import { FindUniqueUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-unique-user.args';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   create(createUserInput: CreateUserInput) {
     return this.prisma.user.create({ data: createUserInput });
-
-    // return 'This action adds a new user';
   }
 
   findAll() {
-    return this.prisma.user.findMany({
-      include: {
-        _count: {
-          select: {
-            posts: true,
-          },
-        },
-        posts: true,
-      },
-    });
+    return this.prisma.user.findMany({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: FindUniqueUserArgs) {
+    return this.prisma.user.findUnique(id);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  async findUnique(args: FindUniqueUserArgs): Promise<User | null> {
+    return this.prisma.user.findUnique(args);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+  // update(id: number, updateUserInput: UpdateUserInput) {
+  //   return `This action updates a #${id} user`;
+  // }
+
+  // remove(id: number) {
+  //   return `This action removes a #${id} user`;
+  // }
 }

@@ -1,13 +1,19 @@
-import { PostCreateNestedManyWithoutAuthorInput } from 'src/@generated/prisma-nestjs-graphql/post/post-create-nested-many-without-author.input';
 import { InputType, Field } from '@nestjs/graphql';
+
 @InputType()
 export class CreateUserInput {
-  @Field()
-  email: string;
+  @Field(() => String, { nullable: false })
+  email!: string;
 
-  @Field({ nullable: true })
-  name?: string;
+  @Field(() => String, { nullable: false })
+  name!: string;
 
-  @Field(() => PostCreateNestedManyWithoutAuthorInput, { nullable: true })
-  posts?: PostCreateNestedManyWithoutAuthorInput;
+  @Field(() => String, { nullable: false })
+  password!: string;
+
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
 }

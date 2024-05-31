@@ -2,89 +2,51 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Post {
-  id: ID!
-  title: String!
-  content: String
-  published: Boolean
-  authorId: Int
-  author: User
-}
-
-type UserCount {
-  posts: Int!
-}
-
 type User {
   id: ID!
   email: String!
-  name: String
-  posts: [Post!]
-  _count: UserCount!
+  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type LoginResponse {
+  access_token: String!
+  user: User!
 }
 
 type Query {
+  user(where: UserWhereUniqueInput!): User!
   users: [User!]!
-  user(id: Int!): User!
-  posts: [Post!]!
-  post(id: Int!): Post!
 }
 
-type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User!
-  createPost(createPostInput: CreatePostInput!): Post!
-  updatePost(updatePostInput: UpdatePostInput!): Post!
-  removePost(id: Int!): Post!
-}
-
-input CreateUserInput {
-  email: String!
-  name: String
-  posts: PostCreateNestedManyWithoutAuthorInput
-}
-
-input PostCreateNestedManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
-  createMany: PostCreateManyAuthorInputEnvelope
-  connect: [PostWhereUniqueInput!]
-}
-
-input PostCreateWithoutAuthorInput {
-  title: String!
-  content: String
-  published: Boolean
-}
-
-input PostCreateOrConnectWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  create: PostCreateWithoutAuthorInput!
-}
-
-input PostWhereUniqueInput {
+input UserWhereUniqueInput {
   id: Int
-  AND: [PostWhereInput!]
-  OR: [PostWhereInput!]
-  NOT: [PostWhereInput!]
-  title: StringFilter
-  content: StringNullableFilter
-  published: BoolNullableFilter
-  authorId: IntNullableFilter
-  author: UserNullableRelationFilter
+  email: String
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  name: StringFilter
+  password: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
 }
 
-input PostWhereInput {
-  AND: [PostWhereInput!]
-  OR: [PostWhereInput!]
-  NOT: [PostWhereInput!]
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
   id: IntFilter
-  title: StringFilter
-  content: StringNullableFilter
-  published: BoolNullableFilter
-  authorId: IntNullableFilter
-  author: UserNullableRelationFilter
+  email: StringFilter
+  name: StringFilter
+  password: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
 }
 
 input IntFilter {
@@ -137,113 +99,42 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
-input StringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableFilter
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
 }
 
-input NestedStringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableFilter
+input NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
 }
 
-input BoolNullableFilter {
-  equals: Boolean
-  not: NestedBoolNullableFilter
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
 }
 
-input NestedBoolNullableFilter {
-  equals: Boolean
-  not: NestedBoolNullableFilter
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
-input IntNullableFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntNullableFilter
-}
-
-input NestedIntNullableFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntNullableFilter
-}
-
-input UserNullableRelationFilter {
-  is: UserWhereInput
-  isNot: UserWhereInput
-}
-
-input UserWhereInput {
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
-  id: IntFilter
-  email: StringFilter
-  name: StringNullableFilter
-  posts: PostListRelationFilter
-}
-
-input PostListRelationFilter {
-  every: PostWhereInput
-  some: PostWhereInput
-  none: PostWhereInput
-}
-
-input PostCreateManyAuthorInputEnvelope {
-  data: [PostCreateManyAuthorInput!]!
-  skipDuplicates: Boolean
-}
-
-input PostCreateManyAuthorInput {
-  id: Int
-  title: String!
-  content: String
-  published: Boolean
-}
-
-input UpdateUserInput {
-  email: String
-  name: String
-  posts: PostCreateNestedManyWithoutAuthorInput
-  id: Int!
-}
-
-input CreatePostInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdatePostInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+input LoginUserInput {
+  email: String!
+  password: String!
 }

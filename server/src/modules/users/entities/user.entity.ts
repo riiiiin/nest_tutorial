@@ -1,10 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
-//変更
-import { Post } from '../../posts/entities/post.entity';
-//追加
-import { UserCount } from './user-count.output';
+import { HideField } from '@nestjs/graphql';
 
 @ObjectType()
 export class User {
@@ -14,12 +11,15 @@ export class User {
   @Field(() => String, { nullable: false })
   email!: string;
 
-  @Field(() => String, { nullable: true })
-  name!: string | null;
+  @Field(() => String, { nullable: false })
+  name!: string;
 
-  @Field(() => [Post], { nullable: true })
-  posts?: Array<Post>;
+  @HideField()
+  password!: string;
 
-  @Field(() => UserCount, { nullable: false })
-  _count?: UserCount;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date;
+
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date;
 }
