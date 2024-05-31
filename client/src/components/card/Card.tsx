@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import "./card.scss";
+import React from "react";
 
-function Card({ item }) {
+function Card({ item }: {item: any}) {
   return (
     <div className="card">
       <Link to={`/${item.id}`} className="imageContainer">

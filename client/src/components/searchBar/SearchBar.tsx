@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./searchBar.scss";
-
+import React from "react";
 const types = ["buy", "rent"];
 
 function SearchBar() {
@@ -11,7 +11,7 @@ function SearchBar() {
     maxPrice: 0,
   });
 
-  const switchType = (val) => {
+  const switchType = (val: string) => {
     setQuery((prev) => ({ ...prev, type: val }));
   };
 

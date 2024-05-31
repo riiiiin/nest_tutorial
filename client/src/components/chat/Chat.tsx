@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./chat.scss";
+import React from "react";
 
 function Chat() {
-  const [chat, setChat] = useState(true);
+  const [chat, setChat] = useState<boolean| null>(true);
   return (
     <div className="chat">
       <div className="messages">

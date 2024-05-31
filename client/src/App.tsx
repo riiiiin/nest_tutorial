@@ -9,6 +9,7 @@ import SinglePage from "./routes/singlePage/singlePage";
 import ProfilePage from "./routes/profilePage/profilePage";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
+import React from "react";
 
 function App() {
   const router = createBrowserRouter([

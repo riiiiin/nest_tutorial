@@ -1,20 +1,22 @@
 import { useState } from "react";
 import "./slider.scss";
+import React from "react";
+function Slider({ images }: {images: any}) {
+  const [imageIndex, setImageIndex] = useState<number | null>(null);
 
-function Slider({ images }) {
-  const [imageIndex, setImageIndex] = useState(null);
-
-  const changeSlide = (direction) => {
+  const changeSlide = (direction: any) => {
     if (direction === "left") {
       if (imageIndex === 0) {
         setImageIndex(images.length - 1);
       } else {
+        if (imageIndex)
         setImageIndex(imageIndex - 1);
       }
     } else {
       if (imageIndex === images.length - 1) {
         setImageIndex(0);
       } else {
+        if (imageIndex)
         setImageIndex(imageIndex + 1);
       }
     }
@@ -42,7 +44,7 @@ function Slider({ images }) {
         <img src={images[0]} alt="" onClick={() => setImageIndex(0)} />
       </div>
       <div className="smallImages">
-        {images.slice(1).map((image, index) => (
+        {images.slice(1).map((image: any, index:number) => (
           <img
             src={image}
             alt=""

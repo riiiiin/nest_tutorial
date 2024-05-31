@@ -1,7 +1,7 @@
 import './list.scss'
 import Card from"../card/Card"
 import {listData} from"../../lib/dummydata"
-
+import React from "react";
 function List(){
   return (
     <div className='list'>
